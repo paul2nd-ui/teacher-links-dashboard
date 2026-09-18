@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>대입 선생님 링크 대시보드</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue:#1565c0;--navy:#0d47a1;--ink:#1a1a2e;--muted:#6b7280;
+  --bg:#f0f2f5;--card:#fff;--line:#e8ecf4;
+}
+body{font-family:'Apple SD Gothic Neo','Malgun Gothic',sans-serif;background:var(--bg);color:var(--ink);font-size:14px}
+.header{background:linear-gradient(135deg,#0d47a1 0%,#1565c0 60%,#0277bd 100%);color:#fff;padding:20px 28px}
+.header-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.logo{width:46px;height:46px;background:rgba(255,255,255,.15);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.header-txt h1{font-size:20px;font-weight:800;letter-spacing:-.3px}
+.header-txt p{font-size:12px;opacity:.85;margin-top:4px}
+.header-badges{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.hbadge{padding:5px 12px;border-radius:12px;font-size:11px;font-weight:700;background:rgba(255,255,255,.18)}
+.wrap{max-width:1200px;margin:0 auto;padding:18px 18px 48px}
+.kpi-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-bottom:16px}
+.kpi{background:var(--card);border-radius:12px;padding:14px 16px;box-shadow:0 2px 8px rgba(0,0,0,.06);border-top:3px solid var(--blue)}
+.kpi-l{font-size:10px;color:#888;font-weight:700;letter-spacing:.3px;margin-bottom:4px}
+.kpi-v{font-size:22px;font-weight:900;color:#1a237e}
+.search-bar{background:var(--card);border-radius:12px;padding:14px 16px;box-shadow:0 2px 8px rgba(0,0,0,.06);margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.search-bar input{flex:1;min-width:220px;padding:10px 14px;border:1.5px solid #dde3ee;border-radius:10px;font-size:14px;outline:none}
+.search-bar input:focus{border-color:var(--blue)}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.chip{padding:7px 13px;border-radius:16px;border:2px solid #e0e4ea;background:#fff;cursor:pointer;font-size:12px;font-weight:700;color:#555}
+.chip:hover{border-color:var(--blue);color:var(--blue)}
+.chip.on{background:var(--blue);color:#fff;border-color:var(--blue)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.card{background:var(--card);border-radius:14px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,.06);display:flex;flex-direction:column;gap:8px;min-height:168px;border:1px solid transparent;transition:box-shadow .15s,transform .15s}
+.card:hover{box-shadow:0 8px 22px rgba(13,71,161,.12);transform:translateY(-1px)}
+.card.missing{opacity:.72}
+.tag{display:inline-block;padding:3px 8px;border-radius:8px;font-size:10px;font-weight:800}
+.t-저학년{background:#e3f2fd;color:#1565c0}
+.t-입시결과{background:#e8f5e9;color:#2e7d32}
+.t-생기부{background:#fff3e0;color:#e65100}
+.t-면접논술{background:#fce4ec;color:#c62828}
+.t-전형제도{background:#f3e5f5;color:#6a1b9a}
+.t-기타{background:#eceff1;color:#455a64}
+.card h3{font-size:15px;font-weight:800;line-height:1.35}
+.meta{font-size:11px;color:var(--muted)}
+.url{font-size:11px;color:#607d8b;word-break:break-all;line-height:1.4}
+.actions{margin-top:auto;display:flex;gap:8px}
+.btn{flex:1;text-align:center;padding:8px 10px;border-radius:10px;font-size:12px;font-weight:800;text-decoration:none;cursor:pointer;border:0}
+.btn-open{background:var(--blue);color:#fff}
+.btn-copy{background:#eef3fb;color:#1565c0}
+.btn[disabled]{background:#eee;color:#aaa;cursor:not-allowed}
+.empty{text-align:center;padding:48px 12px;color:#999;background:#fff;border-radius:12px}
+.foot{margin-top:22px;font-size:11px;color:#9aa3b2;text-align:center;line-height:1.6}
+@media (max-width:900px){.kpi-grid{grid-template-columns:repeat(3,1fr)}.header-badges{margin-left:0}}
+@media (max-width:560px){.kpi-grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="header-inner">
+    <div class="logo">🎓</div>
+    <div class="header-txt">
+      <h1>대입 선생님 링크 대시보드</h1>
+      <p>노션 「2026 인천마전고 · 대입」에 모인 선생님 제작 사이트 · 한 화면에서 검색·바로가기</p>
+    </div>
+    <div class="header-badges">
+      <span class="hbadge">1·2학년 포함</span>
+      <span class="hbadge">노션 원본</span>
+    </div>
+  </div>
+</div>
+<div class="wrap">
+  <div class="kpi-grid" id="kpis"></div>
+  <div class="search-bar">
+    <input id="q" type="search" placeholder="이름, 주소, 분류로 찾기  (예: 면접, 생기부, 배치표)">
+  </div>
+  <div class="chips" id="chips"></div>
+  <div class="grid" id="grid"></div>
+  <div class="foot">출처: 노션 워크스페이스 「뽀개기 대입」 / 「노션공부」 · 2026(인천마전고) · 대입 링크 모음<br>외부 사이트는 각 선생님이 만든 자료입니다. 링크가 바뀌면 노션 원본을 기준으로 이 파일을 다시 모으면 됩니다.</div>
+</div>
+<script>
+const LINKS = [
+  {title:"1.2학년 대입 준비(학생용)", url:"https://www.notion.so/32cf0f60241580a18e5dee312b868bca", cat:"저학년", date:"2026-03-20", note:"노션 내부 페이지"},
+  {title:"과목 선택 상담", url:"https://subject-intersection-lab.vercel.app/", cat:"저학년", date:"2026-06-12"},
+  {title:"2022 개정교육과정 고등학교 과목 내비게이션", url:"https://hikimho.github.io/-/", cat:"저학년", date:"2026-06-24"},
+  {title:"직업 맵", url:"https://park-sanggeun.github.io/JOBIVERSE-MAP/", cat:"저학년", date:"2026-06-11"},
+  {title:"모두의 대입 2027 배치표", url:"https://park-sanggeun.github.io/Admissions-Matrix/", cat:"입시결과", date:"2026-06-01"},
+  {title:"9등급 환산 대학 입시", url:"https://park-sanggeun.github.io/admission-dashboard-260219/", cat:"입시결과", date:"2026-06-11"},
+  {title:"어디가 ~2026대입결과", url:"https://thecozyforest.github.io/dochis-warehouse/susi-admissions-viewer-2023-2026/", cat:"입시결과", date:"2026-06-11"},
+  {title:"전문대 전공별", url:"https://thecozyforest.github.io/dochis-warehouse/college-major-admissions-viewer/", cat:"입시결과", date:"2026-06-11"},
+  {title:"수시 입결 어디가 자료", url:"https://doctor-noh.vercel.app/", cat:"입시결과", date:"2026-07-20"},
+  {title:"대학 개설학과 모집인원 검색", url:"https://jinhak.esteacher.kr/2027uni.html", cat:"입시결과", date:"2026-07-16"},
+  {title:"전국 대학교 자료들", url:"https://jinhak.esteacher.kr/index.html?cat=info", cat:"입시결과", date:"2026-07-21"},
+  {title:"부산교육청 5등급 변환", url:"https://jinhakai.pen.go.kr/entrance/gradeConversion", cat:"입시결과", date:"2026-05-26"},
+  {title:"서진협/경기진협 자료", url:"https://thecozyforest.github.io/dochis-warehouse/admissions/2027_%EC%9E%85%EC%8B%9C_%ED%86%B5%ED%95%A9%EB%B7%B0%EC%96%B4(%EC%84%9C%EC%A7%84%ED%98%91,%20%EA%B2%BD%EA%B8%B0%EC%A7%84%ED%98%91).html", cat:"입시결과", date:"2026-06-21"},
+  {title:"생기부 작성 프롬프트 생성", url:"https://schoolremarks-prompt.netlify.app/", cat:"생기부", date:"2026-07-11"},
+  {title:"모두의 생기부 분석기(0912)", url:"https://script.google.com/macros/s/AKfycbyBonw8PXGv8HtX_Xwn7tOM2ySPxcz9lqTjCRSu7J1vWESA7KzFdsH51xByVAXOEJlU/exec", cat:"생기부", date:"2026-09-03"},
+  {title:"생기부 분석기(비: 0912)", url:"https://script.google.com/macros/s/AKfycbyBonw8PXGv8HtX_Xwn7tOM2ySPxcz9lqTjCRSu7J1vWESA7KzFdsH51xByVAXOEJlU/exec", cat:"생기부", date:"2026-05-18", note:"모두의 생기부 분석기와 같은 주소"},
+  {title:"탐구주제", url:"https://script.google.com/macros/s/AKfycbzvwWBEc0_bSHuU7nUgNEBIrBDA93w7ndwTwbFWwuSTjmbn1G38adcCeAs03AI8Hq_a/exec?site=public", cat:"생기부", date:"2026-07-13"},
+  {title:"탐구주제 찾기 (교과별)", url:"https://park-sanggeun.github.io/Mozamussa/", cat:"생기부", date:"2026-06-21"},
+  {title:"모두의 수학교과-도서연계 탐구", url:"https://park-sanggeun.github.io/modu-math-book-inquiry/", cat:"생기부", date:"2026-06-12"},
+  {title:"교과 성취기준 역량", url:"https://stas.moe.go.kr/cmn/main", cat:"생기부", date:"2026-06-12"},
+  {title:"교과핵심역량을 언어로", url:"https://fastidious-brigadeiros-07cdae.netlify.app/", cat:"생기부", date:"2026-06-29"},
+  {title:"면접", url:"https://hanmin-seven.vercel.app/#/home", cat:"면접논술", date:"2026-09-15"},
+  {title:"면접(기경민)0912", url:"https://script.google.com/macros/s/AKfycbzvbEmbIX2Vz3lvKYuDqWdxJZOtabmcurmagLCSig4H9ZIHNHe7tz1ilO187cHBjQ2kWA/exec", cat:"면접논술", date:"2026-09-17"},
+  {title:"면접문제 생성기", url:"https://jinhak.esteacher.kr/student_record_interview.html", cat:"면접논술", date:"2026-06-17"},
+  {title:"논술 상담프로그램(5012)", url:"https://sites.google.com/view/daonnonsul/%ED%99%88", cat:"면접논술", date:"2026-06-20"},
+  {title:"모두의 국어 약술 논술 lab", url:"https://modu-korean-nonsul.pages.dev/", cat:"면접논술", date:"2026-07-15"},
+  {title:"2028학년도 시행계획 검색기", url:"https://script.google.com/macros/s/AKfycbzRCA4FQ_9kT0SvrfA67B8j-4CcKTmVbaXzeDF9d0BKUyqr3_8K6Ne2sRuqvoRD5EOWRg/exec", cat:"전형제도", date:"2026-05-08"},
+  {title:"재외국민 특별전형", url:"https://okep.moe.go.kr/html/page.do?htmlId=18&menu_seq=21", cat:"전형제도", date:"2026-05-14"},
+  {title:"2027학년도 대입 설명자료(서혜승외 2명)", url:"", cat:"전형제도", date:"2026-05-14", note:"노션에 파일만 있고 공개 주소는 없음"},
+  {title:"다양한 앱 개발", url:"https://dorms.school/", cat:"기타", date:"2026-09-16"},
+  {title:"대교협 하계연수", url:"https://script.google.com/macros/s/AKfycbyBonw8PXGv8HtX_Xwn7tOM2ySPxcz9lqTjCRSu7J1vWESA7KzFdsH51xByVAXOEJlU/exec", cat:"기타", date:"2026-09-03", note:"생기부 분석기와 같은 주소로 저장됨"},
+  {title:"NotebookLM", url:"https://notebooklm.google.com/", cat:"기타", date:"2026-03-20"}
+];
+const CATS = ["전체","저학년","입시결과","생기부","면접논술","전형제도","기타"];
+const LABELS = {저학년:"저학년 준비", 입시결과:"입시 결과·배치", 생기부:"생기부·탐구", 면접논술:"면접·논술", 전형제도:"전형·제도", 기타:"기타"};
+let cat = "전체";
+function hostOf(u){ try { return new URL(u).hostname.replace(/^www\./,""); } catch(e){ return "주소 없음"; } }
+function filtered(){
+  const q = (document.getElementById("q").value||"").trim().toLowerCase();
+  return LINKS.filter(x => {
+    if (cat!=="전체" && x.cat!==cat) return false;
+    if (!q) return true;
+    return (x.title+" "+(x.url||"")+" "+(x.note||"")+" "+(LABELS[x.cat]||"")).toLowerCase().includes(q);
+  }).sort((a,b)=> (b.date||"").localeCompare(a.date||""));
+}
+function renderKpi(){
+  const open = LINKS.filter(x=>x.url).length;
+  const html = [
+    ["전체", LINKS.length, "#1565c0"],
+    ["바로가기", open, "#2e7d32"],
+    ["저학년", LINKS.filter(x=>x.cat==="저학년").length, "#0277bd"],
+    ["입시결과", LINKS.filter(x=>x.cat==="입시결과").length, "#2e7d32"],
+    ["생기부", LINKS.filter(x=>x.cat==="생기부").length, "#e65100"],
+    ["면접·논술", LINKS.filter(x=>x.cat==="면접논술").length, "#c62828"]
+  ].map(([l,v,c])=>`<div class="kpi" style="border-top-color:${c}"><div class="kpi-l">${l}</div><div class="kpi-v">${v}</div></div>`).join("");
+  document.getElementById("kpis").innerHTML = html;
+}
+function renderChips(){
+  document.getElementById("chips").innerHTML = CATS.map(c=>{
+    const n = c==="전체"? LINKS.length : LINKS.filter(x=>x.cat===c).length;
+    const label = c==="전체"? "전체" : LABELS[c];
+    return `<button class="chip ${cat===c?"on":""}" data-cat="${c}">${label} ${n}</button>`;
+  }).join("");
+  document.querySelectorAll(".chip").forEach(b=>b.onclick=()=>{cat=b.dataset.cat; draw();});
+}
+function renderGrid(){
+  const rows = filtered();
+  const el = document.getElementById("grid");
+  if (!rows.length){ el.innerHTML = `<div class="empty">찾는 링크가 없습니다. 다른 검색어를 입력해 보세요.</div>`; return; }
+  el.innerHTML = rows.map(x=>{
+    const missing = !x.url;
+    const open = missing ? `<span class="btn" disabled>주소 없음</span>` : `<a class="btn btn-open" href="${x.url}" target="_blank" rel="noopener">열기</a>`;
+    const copy = missing ? "" : `<button class="btn btn-copy" data-url="${x.url}">복사</button>`;
+    return `<article class="card ${missing?"missing":""}">
+      <div><span class="tag t-${x.cat}">${LABELS[x.cat]}</span></div>
+      <h3>${x.title}</h3>
+      <div class="meta">${x.date||""}${x.note? " · "+x.note:""}</div>
+      <div class="url">${hostOf(x.url)}</div>
+      <div class="actions">${open}${copy}</div>
+    </article>`;
+  }).join("");
+  document.querySelectorAll(".btn-copy").forEach(b=>b.onclick=async()=>{
+    try{ await navigator.clipboard.writeText(b.dataset.url); b.textContent="복사됨"; setTimeout(()=>b.textContent="복사",900);}catch(e){ b.textContent="실패"; }
+  });
+}
+function draw(){ renderKpi(); renderChips(); renderGrid(); }
+document.getElementById("q").addEventListener("input", renderGrid);
+draw();
+</script>
+</body>
+</html>
