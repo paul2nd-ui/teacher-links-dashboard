@@ -80,10 +80,8 @@ body{font-family:'Apple SD Gothic Neo','Malgun Gothic',sans-serif;background:var
 </div>
 <script>
 const LINKS = [
-  {title:"1.2학년 대입 준비(학생용)", url:"https://www.notion.so/32cf0f60241580a18e5dee312b868bca", cat:"저학년", date:"2026-03-20", note:"노션 내부 페이지"},
   {title:"과목 선택 상담", url:"https://subject-intersection-lab.vercel.app/", cat:"저학년", date:"2026-06-12"},
   {title:"2022 개정교육과정 고등학교 과목 내비게이션", url:"https://hikimho.github.io/-/", cat:"저학년", date:"2026-06-24"},
-  {title:"직업 맵", url:"https://park-sanggeun.github.io/JOBIVERSE-MAP/", cat:"저학년", date:"2026-06-11"},
   {title:"모두의 대입 2027 배치표", url:"https://park-sanggeun.github.io/Admissions-Matrix/", cat:"입시결과", date:"2026-06-01"},
   {title:"9등급 환산 대학 입시", url:"https://park-sanggeun.github.io/admission-dashboard-260219/", cat:"입시결과", date:"2026-06-11"},
   {title:"어디가 ~2026대입결과", url:"https://thecozyforest.github.io/dochis-warehouse/susi-admissions-viewer-2023-2026/", cat:"입시결과", date:"2026-06-11"},
@@ -95,23 +93,19 @@ const LINKS = [
   {title:"서진협/경기진협 자료", url:"https://thecozyforest.github.io/dochis-warehouse/admissions/2027_%EC%9E%85%EC%8B%9C_%ED%86%B5%ED%95%A9%EB%B7%B0%EC%96%B4(%EC%84%9C%EC%A7%84%ED%98%91,%20%EA%B2%BD%EA%B8%B0%EC%A7%84%ED%98%91).html", cat:"입시결과", date:"2026-06-21"},
   {title:"생기부 작성 프롬프트 생성", url:"https://schoolremarks-prompt.netlify.app/", cat:"생기부", date:"2026-07-11"},
   {title:"모두의 생기부 분석기(0912)", url:"https://script.google.com/macros/s/AKfycbyBonw8PXGv8HtX_Xwn7tOM2ySPxcz9lqTjCRSu7J1vWESA7KzFdsH51xByVAXOEJlU/exec", cat:"생기부", date:"2026-09-03"},
-  {title:"생기부 분석기(비: 0912)", url:"https://script.google.com/macros/s/AKfycbyBonw8PXGv8HtX_Xwn7tOM2ySPxcz9lqTjCRSu7J1vWESA7KzFdsH51xByVAXOEJlU/exec", cat:"생기부", date:"2026-05-18", note:"모두의 생기부 분석기와 같은 주소"},
   {title:"탐구주제", url:"https://script.google.com/macros/s/AKfycbzvwWBEc0_bSHuU7nUgNEBIrBDA93w7ndwTwbFWwuSTjmbn1G38adcCeAs03AI8Hq_a/exec?site=public", cat:"생기부", date:"2026-07-13"},
   {title:"탐구주제 찾기 (교과별)", url:"https://park-sanggeun.github.io/Mozamussa/", cat:"생기부", date:"2026-06-21"},
   {title:"모두의 수학교과-도서연계 탐구", url:"https://park-sanggeun.github.io/modu-math-book-inquiry/", cat:"생기부", date:"2026-06-12"},
   {title:"교과 성취기준 역량", url:"https://stas.moe.go.kr/cmn/main", cat:"생기부", date:"2026-06-12"},
   {title:"교과핵심역량을 언어로", url:"https://fastidious-brigadeiros-07cdae.netlify.app/", cat:"생기부", date:"2026-06-29"},
-  {title:"면접", url:"https://hanmin-seven.vercel.app/#/home", cat:"면접논술", date:"2026-09-15"},
+  {title:"2027 대입 면접 종합 시스템", url:"https://hanmin-seven.vercel.app/#/home", cat:"면접논술", date:"2026-09-15"},
   {title:"면접(기경민)0912", url:"https://script.google.com/macros/s/AKfycbzvbEmbIX2Vz3lvKYuDqWdxJZOtabmcurmagLCSig4H9ZIHNHe7tz1ilO187cHBjQ2kWA/exec", cat:"면접논술", date:"2026-09-17"},
   {title:"면접문제 생성기", url:"https://jinhak.esteacher.kr/student_record_interview.html", cat:"면접논술", date:"2026-06-17"},
   {title:"논술 상담프로그램(5012)", url:"https://sites.google.com/view/daonnonsul/%ED%99%88", cat:"면접논술", date:"2026-06-20"},
   {title:"모두의 국어 약술 논술 lab", url:"https://modu-korean-nonsul.pages.dev/", cat:"면접논술", date:"2026-07-15"},
   {title:"2028학년도 시행계획 검색기", url:"https://script.google.com/macros/s/AKfycbzRCA4FQ_9kT0SvrfA67B8j-4CcKTmVbaXzeDF9d0BKUyqr3_8K6Ne2sRuqvoRD5EOWRg/exec", cat:"전형제도", date:"2026-05-08"},
   {title:"재외국민 특별전형", url:"https://okep.moe.go.kr/html/page.do?htmlId=18&menu_seq=21", cat:"전형제도", date:"2026-05-14"},
-  {title:"2027학년도 대입 설명자료(서혜승외 2명)", url:"", cat:"전형제도", date:"2026-05-14", note:"노션에 파일만 있고 공개 주소는 없음"},
-  {title:"다양한 앱 개발", url:"https://dorms.school/", cat:"기타", date:"2026-09-16"},
-  {title:"대교협 하계연수", url:"https://script.google.com/macros/s/AKfycbyBonw8PXGv8HtX_Xwn7tOM2ySPxcz9lqTjCRSu7J1vWESA7KzFdsH51xByVAXOEJlU/exec", cat:"기타", date:"2026-09-03", note:"생기부 분석기와 같은 주소로 저장됨"},
-  {title:"NotebookLM", url:"https://notebooklm.google.com/", cat:"기타", date:"2026-03-20"}
+  {title:"다양한 앱 개발", url:"https://dorms.school/", cat:"기타", date:"2026-09-16"}
 ];
 const CATS = ["전체","저학년","입시결과","생기부","면접논술","전형제도","기타"];
 const LABELS = {저학년:"저학년 준비", 입시결과:"입시 결과·배치", 생기부:"생기부·탐구", 면접논술:"면접·논술", 전형제도:"전형·제도", 기타:"기타"};
